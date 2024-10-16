@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Checker</title>
+    <h2>Password Strength Checker</h2>
+    <input type="password" id="password" placeholder="Enter your password" >
+    
+
+    <style>
+
+        .weak {
+            color: red;
+        }
+        .medium {
+            color: orange;
+        }
+        .strong {
+            color: green;
+        }
+        
+    </style>
+</head>
+<body>
+
+   
+    <div id="main"></div>
+    
+        
+    
+    
+
+    <footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script type="text/javascript" src="jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="passChecker.jquery.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#password').on('input', function () {
+                    var password = $(this).val();
+                    var main = $('#main');
+                    var strength = 'weak';
+
+                    if (password.length >= 8) {
+                        if (/[A-Z]/.test(password) && /[0-9]/.test(password) && /[!@#$%^&*]/.test(password)) {
+                            strength = 'strong';
+                        } else if (/[A-Z]/.test(password) || /[0-9]/.test(password) || /[!@#$%^&*]/.test(password)) {
+                            strength = 'medium';
+                        }
+                    }
+
+                    main.removeClass();
+                    if (strength === 'weak') {
+                        
+                        main.addClass('weak').text('Weak Password');
+                    } else if (strength === 'medium') {
+                        main.addClass('medium').text('Medium Password');
+                    } else if (strength === 'strong') {
+                        main.addClass('strong').text('Strong Password');
+                    }
+                });
+            });
+        </script>
+    </footer>
+
+</body>
+</html>
